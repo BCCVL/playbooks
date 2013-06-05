@@ -9,5 +9,5 @@
 
 - name: Setup 4store backend
   action: command
-          4s-backend-setup
+          4s-backend-setup DefaultKB
   notify: Restart 4store
