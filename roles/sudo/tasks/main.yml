@@ -1,0 +1,31 @@
+---
+- name: Configure Sudo for "webdevs"
+  action: copy
+          src=sudoers.d/webdevs
+          dest=/etc/sudoers.d/webdevs
+          owner=root
+          group=root
+          mode=440
+          validate="visudo -c -f %s"
+
+- name: Ensure "webdevs" can use sudo without a tty
+  action: lineinfile
+          dest=/etc/sudoers
+          regexp="^Defaults\:webdevs\s+\!requiretty$"
+          insertafter="^Defaults\s+requiretty$"
+          line="Defaults:webdevs !requiretty"
+          state=present
+
+- name: Ensure /usr/local/sbin:/usr/local/bin are in secure_path
+  action: lineinfile
+          dest=/etc/sudoers
+          regexp="^Defaults\s+secure\_path\s+\=\s+\/usr\/local\/sbin\:\/usr\/local\/bin\:\/sbin\:\/bin\:\/usr\/sbin\:\/usr\/bin$"
+          insertafter="^Defaults\s+secure\_path\s+\=\s+\/sbin\:\/bin\:\/usr\/sbin\:\/usr\/bin$"
+          line="Defaults    secure_path = /usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
+          state=present
+
+- name: Ensure old secure_path is absent
+  action: lineinfile
+          dest=/etc/sudoers
+          regexp="^Defaults\s+secure\_path\s+\=\s+\/sbin\:\/bin\:\/usr\/sbin\:\/usr\/bin$"
+          state=absent

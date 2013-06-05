@@ -1,0 +1,8 @@
+---
+- name: Restart Apache
+  action: service name=httpd state=restarted
+
+- name: Restart supervisord
+  action: service
+          name=supervisord
+          state=restarted

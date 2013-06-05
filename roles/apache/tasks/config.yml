@@ -1,0 +1,25 @@
+---
+- name: Apache NameVirtualHost Configuration
+  action: lineinfile
+          dest=/etc/httpd/conf/httpd.conf
+          regexp="^\#NameVirtualHost\s+\*\:80$"
+          insertafter="^\#NameVirtualHost\s+\*\:80$"
+          line="NameVirtualHost *:80"
+          state=present
+  notify: Restart Apache
+
+- name: Apache NameVirtualHost Configuration
+  action: lineinfile
+          dest=/etc/httpd/conf/httpd.conf
+          regexp="^\#NameVirtualHost\s+\*\:80$"
+          state=absent
+
+  notify: Restart Apache
+
+- name: Apache Sites Configuration
+  action: lineinfile
+          dest=/etc/httpd/conf/httpd.conf
+          regexp="^Include sites"
+          line="Include sites.d/*.conf"
+          state=present
+  notify: Restart Apache

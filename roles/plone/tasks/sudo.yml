@@ -1,0 +1,7 @@
+---
+- name: Allow webdevs to sudo -u plone
+  action: lineinfile
+          dest=/etc/sudoers.d/webdevs
+          regexp="^\%webdevs\ ALL\=\(plone\)\ NOPASSWD\:\ ALL"
+          line="%webdevs ALL=(plone) NOPASSWD:ALL"
+          state=present

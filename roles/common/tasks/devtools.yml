@@ -1,0 +1,8 @@
+---
+
+- name: Development Tools
+  action: yum name="$item" state=present
+  with_items:
+    - "@Development Tools"
+    - mercurial
+    - git

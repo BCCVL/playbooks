@@ -1,0 +1,11 @@
+---
+- name: Download sparql-pro (4store)
+  action: get_url
+          url=http://repo.sparql.pro/centos/sparql-pro-1.0.0-1.noarch.rpm
+          dest=/usr/local/src
+
+- name: Install sparql-pro (4store)
+  action: command
+          rpm -ivh sparql-pro-1.0.0-1.noarch.rpm
+          chdir=/usr/local/src
+          creates=/etc/yum.repos.d/sparql-pro.repo

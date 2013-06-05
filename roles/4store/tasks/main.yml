@@ -1,0 +1,13 @@
+---
+- include: sudo.yml
+- include: repo.yml
+
+- name: Install 4store
+  action: yum
+          name=4store
+          state=present
+
+- name: Setup 4store backend
+  action: command
+          4s-backend-setup
+  notify: Restart 4store

@@ -1,0 +1,11 @@
+---
+- name: Download epel
+  action: get_url
+          url=http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-$epel_version.noarch.rpm
+          dest=/usr/local/src
+
+- name: Install epel
+  action: command
+          rpm -ivh epel-release-$epel_version.noarch.rpm
+          chdir=/usr/local/src
+          creates=/etc/yum.repos.d/epel.repo

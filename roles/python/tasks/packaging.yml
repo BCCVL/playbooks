@@ -1,0 +1,22 @@
+---
+- name: Download distirbute_setup.py
+  action: get_url
+          url=http://python-distribute.org/distribute_setup.py
+          dest=/usr/local/src/distribute_setup.py
+
+- name: Install distribute
+  action: command
+          chdir=/usr/local/src
+          creates=/usr/local/bin/easy_install
+          /usr/local/bin/python2.7 distribute_setup.py
+
+- name: Download get_pip.py
+  action: get_url
+          url=https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+          dest=/usr/local/src/get_pip.py
+
+- name: Install pip
+  action: command
+          chdir=/usr/local/src
+          creates=/usr/local/bin/pip
+          /usr/local/bin/python2.7 get_pip.py

@@ -1,0 +1,7 @@
+---
+- name: Allow webdevs to sudo /sbin/service supervisord *
+  action: lineinfile
+          dest=/etc/sudoers.d/webdevs
+          regexp="\%webdevs\ ALL\=\/sbin\/service\ supervisord\ \*"
+          line="%webdevs ALL=NOPASSWD:/sbin/service supervisord *"
+          state=present

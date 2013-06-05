@@ -1,0 +1,26 @@
+---
+- name: Create shibboleth System Group
+  action: group
+          name=shibd
+          system=yes
+          state=present
+
+- name: Create shibboleth System User
+  action: user
+          name=shibd
+          system=yes
+          group=shibd
+          shell=/sbin/nologin
+          home=/var/run/shibboleth
+          comment="Shibboleth SP daemon"
+          state=present
+
+- name: Download and Install security:shiboleth repo
+  action: get_url
+          url=http://download.opensuse.org/repositories/security://shibboleth/CentOS_CentOS-6/security:shibboleth.repo
+          dest=/etc/yum.repos.d
+
+- name: Install shibboleth
+  action: yum
+          name=shibboleth
+          state=present

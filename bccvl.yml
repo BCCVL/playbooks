@@ -1,0 +1,16 @@
+---
+- hosts: bccvl.local
+
+  roles:
+   - common
+   - webdevs
+   - users
+   - sudo
+   - apache
+   - python
+   - epel
+   - 4store
+   - plone
+   - postgres
+   - shibboleth
+   - supervisor

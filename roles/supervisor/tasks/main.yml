@@ -1,0 +1,57 @@
+---
+- include: sudo.yml
+
+# Using 3.0a12 due to a bug in 3.0b1 (See: https://github.com/Supervisor/supervisor/issues/231)
+- name: Install supervidor
+  action: pip
+          name=https://pypi.python.org/packages/source/s/supervisor/supervisor-3.0a12.tar.gz
+          state=present
+
+- name: Create supervisor configuration directories
+  action: file
+          path=$item
+          owner=root
+          group=root
+          mode=0755
+          state=directory
+  with_items:
+    - /etc/supervisor
+    - /etc/supdervisor/conf.d
+    - /var/log/supervisor
+
+- name: Copy supervisord.conf
+  action: copy
+          src=supervisord.conf
+          dest=/etc/supervisor/supervisord.conf
+          owner=root
+          group=root
+          mode=0644
+
+- name: Copy supervisord.sysconfig
+  action: copy
+          src=supervisord.sysconfig
+          dest=/etc/sysconfig/supervisord
+          owner=root
+          group=root
+          mode=0644
+
+- name: Copy supervisord.rc
+  action: copy
+        src=supervisord.rc
+        dest=/etc/init.d/supervisord
+        owner=root
+        group=root
+        mode=0755
+
+- name: Symlink /etc/supervisor/supervisord.conf to /etc/supdervisord.conf
+  action: file
+          src=/etc/supervisor/supervisord.conf
+          path=/etc/supervisord.conf
+          state=link
+
+- name: Enable supervisord Service
+  action: service
+          name=supervisord
+          enabled=yes
+          state=started
+  notify: Restart supervisord

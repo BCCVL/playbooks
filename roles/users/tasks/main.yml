@@ -1,0 +1,17 @@
+---
+- name: Add User Accounts
+  action: user
+          name={{ item.name }}
+          comment="{{ item.fullname }}"
+          groups=webdevs
+          state=present
+  with_items:
+    - { name: "s2092651", fullname: "James Mills" }
+
+- name: Add User SSH Keys
+  action: authorized_key
+          user={{ item.name }}
+          key="{{ item.key }}"
+          state=present
+  with_items:
+    - { name: "s2092651", key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtoATu0uebbMZ9fMa3qGhZ2cHkCfzLf1I7V2b9DiN5k/fe5Gem5zEnkFQYmV1PcLfXJcvbdoEX9R7MRpS+48/jnbhMls9RUJ37yVZnXzKNYE3p5bOrWc3wIy2k1UEHxii+PK5gRQeWYQ/BinllzNj4vxTSw1E7U7Dvip28mzbKt2Cg3O9eJDhhsnBkCDbV7EoXc5OmhCsdtihPosgpkeW90nnpxvz2cDZBpGkVDbGbTJJPivStWCOkarc5KC1VznzLsVU2BatstAHy/i2HhO1YmWryTSzeu1DxO5pq0ExTMU38eHXdXYv+GOCabgWnkqvpgptF2nghHdM3/Vn3aYB/ s2092651@031986" }

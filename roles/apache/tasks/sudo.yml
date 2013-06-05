@@ -1,0 +1,7 @@
+---
+- name: Allow webdevs to sudo /sbin/service httpd *
+  action: lineinfile
+          dest=/etc/sudoers.d/webdevs
+          regexp="\%webdevs\ ALL\=\/sbin\/service\ httpd\ \*"
+          line="%webdevs ALL=NOPASSWD:/sbin/service httpd *"
+          state=present

@@ -1,0 +1,17 @@
+---
+- include: sudo.yml
+
+- name: Add "plone" Group
+  action: group
+          name=plone
+          system=yes
+          state=present
+
+- name: Add "plone" User
+  action: user
+          name=plone
+          group="plone"
+          home="/opt/plone"
+          system=yes
+          comment="Plone"
+          state=present

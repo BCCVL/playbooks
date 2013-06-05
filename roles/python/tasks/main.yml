@@ -1,0 +1,25 @@
+---
+- include: deps.yml
+
+- name: Download Python Source
+  action: get_url url=http://python.org/ftp/python/$python_version/Python-$python_version.tar.bz2 dest=/usr/local/src
+
+- name: Extract Python Source
+  action: command tar jxvf Python-$python_version.tar.bz2
+          chdir=/usr/local/src
+          creates=/usr/local/src/Python-$python_version
+
+- name: Configure Python
+  action: command ./configure --prefix=/usr/local --mandir=/usr/local/man --enable-shared --with-threads --enable-ipv6 --with-dbmliborder=gdbm
+          chdir=/usr/local/src/Python-$python_version
+          creates=/usr/local/src/Python-$python_version/Makefile
+
+- name: Build/Install Python
+  action: command make install
+          chdir=/usr/local/src/Python-$python_version
+          creates=/usr/local/bin/python
+
+- include: ../../common/tasks/ldconfig.yml
+
+- include: packaging.yml
+- include: common.yml

@@ -1,0 +1,5 @@
+---
+- name: /etc/profile.d/file
+  action: copy
+          src=path.sh
+          dest=/etc/profile.d/path.sh

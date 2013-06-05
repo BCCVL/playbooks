@@ -1,0 +1,13 @@
+---
+
+- name: Python Development Libraries
+  action: yum name=$item state=present
+  with_items:
+    - zlib-devel
+    - bzip2-devel
+    - libpng-devel
+    - libzip-devel
+    - libjpeg-devel
+    - openssl-devel
+    - readline-devel
+    - freetype-devel

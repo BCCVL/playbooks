@@ -1,0 +1,7 @@
+---
+
+- name: Public Key
+  action: authorized_key
+          user=root
+          key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+          state=present

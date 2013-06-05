@@ -1,0 +1,11 @@
+---
+
+- name: ld.so.conf
+  action: lineinfile
+          dest=/etc/ld.so.conf
+          regexp="^\/usr\/local\/lib$"
+          line="/usr/local/lib"
+          state=present
+
+- name: refresh ld cache
+  action: command /sbin/ldconfig

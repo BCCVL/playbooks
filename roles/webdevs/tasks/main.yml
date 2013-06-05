@@ -1,0 +1,28 @@
+---
+- name: Add "webdevs" Group
+  action: group
+    name=webdevs
+    state=present
+
+- name: Make "webapps" a member of "webdevs"
+  action: user
+          name=webapps
+          append=yes
+          groups=webdevs
+          state=present
+
+- name: Ensure "webdevs" can write to some directories
+  action: file
+          path=$item
+          state=directory
+          owner=root
+          group=webdevs
+          mode=770
+  with_items:
+    - /etc/httpd/conf.d
+    - /etc/httpd/sites.d
+    - /var/log/httpd/sites
+    - /etc/supervisor/conf.d
+  notify:
+    - Restart supervisord
+    - Restart Apache

@@ -1,0 +1,29 @@
+---
+- name: Disable standard (old) PostgreSQL
+  action: ini_file
+          dest=/etc/yum.repos.d/CentOS-Base.repo
+          section=$item
+          option=exclude
+          value="postgres*"
+  with_items:
+    - base
+    - updates
+
+- name: Download pgdg repo
+  action: get_url
+          url=http://yum.postgresql.org/9.3/redhat/rhel-6.3-x86_64/pgdg-centos93-9.3-1.noarch.rpm
+          dest=/usr/local/src
+
+- name: Install pgdg repo
+  action: command
+          rpm -ivh pgdg-centos93-9.3-1.noarch.rpm
+          chdir=/usr/local/src
+          creates=/etc/yum.repos.d/pgdg-93-centos.repo
+
+- name: Install postgres
+  action: yum
+          name=$item
+          state=present
+  with_items:
+    - postgresql93-devel
+    - postgresql93-server

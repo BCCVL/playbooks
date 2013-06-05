@@ -1,0 +1,7 @@
+---
+- name: Install Common Python Libraries/Tools
+  action: pip
+          name=$item
+          state=present
+  with_items:
+    - virtualenvwrapper

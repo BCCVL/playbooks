@@ -1,0 +1,7 @@
+---
+- name: Allow webdevs to sudo /sbin/service 4store *
+  action: lineinfile
+          dest=/etc/sudoers.d/webdevs
+          regexp="\%webdevs\ ALL\=\/sbin\/service\ 4store\ \*"
+          line="%webdevs ALL=NOPASSWD:/sbin/service 4store *"
+          state=present
