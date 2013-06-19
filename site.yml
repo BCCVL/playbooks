@@ -1,5 +1,5 @@
 ---
-- hosts: bccvl.local
+- hosts: hub.local
 
   roles:
    - common
