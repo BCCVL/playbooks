@@ -10,4 +10,5 @@
 - name: Setup 4store backend
   action: command
           4s-backend-setup DefaultKB
+          creates=/var/lib/4store/DefaultKB
   notify: Restart 4store
