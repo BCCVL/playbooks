@@ -1,14 +1,14 @@
 ---
-- name: Download distirbute_setup.py
+- name: Download ez_setup.py
   action: get_url
-          url=http://python-distribute.org/distribute_setup.py
-          dest=/usr/local/src/distribute_setup.py
+          url=https://bitbucket.org/pypa/setuptools/raw/0.8/ez_setup.py
+          dest=/usr/local/src/ez_setup.py
 
-- name: Install distribute
+- name: Install setuptools
   action: command
           chdir=/usr/local/src
           creates=/usr/local/bin/easy_install
-          /usr/local/bin/python2.7 distribute_setup.py
+          /usr/local/bin/python2.7 ez_setup.py
 
 - name: Download get_pip.py
   action: get_url
