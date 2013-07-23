@@ -1,16 +1,18 @@
 ---
 - include: sudo.yml
 
-- name: Iinstall Apache + mod_wsgi
+- name: Iinstall Apache (mod_ssl + mod_wsgi)
   action: yum
           name=$item
           state=present
   with_items:
     - httpd
+    - mod_ssl
     - mod_wsgi
   notify: Restart Apache
 
 - include: config.yml
+- include: sslconfig.yml
 
 - name: Enable Apache Service
   action: service name=httpd enabled=yes
