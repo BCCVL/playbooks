@@ -1,0 +1,17 @@
+---
+- include: sudo.yml
+
+- name: Iinstall Tomcat
+  action: yum
+          name=$item
+          state=present
+  with_items:
+    - tomcat6
+    - tomcat6-webapps
+    - tomcat6-admin-webapps
+  notify: Restart Tomcat
+
+- include: config.yml
+
+- name: Enable Tomcat Service
+  action: service name=tomcat6 enabled=yes

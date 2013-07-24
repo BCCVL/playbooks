@@ -10,6 +10,7 @@
    - python
    - epel
    - 4store
+   - tomcat
    - plone
    - postgres
    - shibboleth

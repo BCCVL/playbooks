@@ -1,0 +1,5 @@
+---
+- name: Configure Tomcat
+  template: src=tomcat-users.xml.j2 dest=/etc/tomcat6/tomcat-users.xml
+  notify:
+  - Restart Tomcat

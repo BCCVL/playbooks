@@ -1,0 +1,7 @@
+---
+- name: Allow webdevs to sudo /sbin/service tomcat6 *
+  action: lineinfile
+          dest=/etc/sudoers.d/webdevs
+          regexp="\%webdevs\ ALL\=\/sbin\/service\ tomcat6\ \*"
+          line="%webdevs ALL=NOPASSWD:/sbin/service tomcat6 *"
+          state=present
