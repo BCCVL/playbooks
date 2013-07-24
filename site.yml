@@ -10,6 +10,7 @@
    - python
    - epel
    - 4store
+   - java
    - tomcat
    - plone
    - postgres
