@@ -1,4 +1,6 @@
 ---
+- include: sudo.yml
+
 - name: Disable standard (old) PostgreSQL
   action: ini_file
           dest=/etc/yum.repos.d/CentOS-Base.repo
@@ -27,3 +29,13 @@
   with_items:
     - postgresql93-devel
     - postgresql93-server
+
+- name: Enable Postgres Service
+  action: service name=postgresql-9.3 enabled=yes
+
+- name: Initialize postgres
+  action: command
+          service postgresql-9.3 initdb
+          creates=/var/lib/pgsql/9.3/data
+  notify:
+    - Restart Postgres

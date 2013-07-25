@@ -1,2 +1,7 @@
 [servers]
 130.102.154.75
+
+[servers:vars]
+hostname = terranova
+hostname_fqdn = terranova.org.au
+tomcat_admin_password = NzW4eSLu0fkW

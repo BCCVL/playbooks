@@ -1,0 +1,7 @@
+---
+- name: Allow webdevs to sudo /sbin/service postgresql-9.3 *
+  action: lineinfile
+          dest=/etc/sudoers.d/webdevs
+          regexp="\%webdevs\ ALL\=\/sbin\/service\ postgresql-9.3\ \*"
+          line="%webdevs ALL=NOPASSWD:/sbin/service postgresql-9.3 *"
+          state=present

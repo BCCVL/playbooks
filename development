@@ -1,2 +1,7 @@
 [servers]
 10.0.0.3
+
+[servers:vars]
+hostname = hub
+hostname_fqdn = hub.local
+tomcat_admin_password = admin
