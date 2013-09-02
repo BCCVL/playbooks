@@ -5,6 +5,7 @@
   with_items:
     - zlib-devel
     - bzip2-devel
+    - sqlite-devel
     - libpng-devel
     - libzip-devel
     - libjpeg-devel
